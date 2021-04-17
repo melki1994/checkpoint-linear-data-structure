@@ -1,0 +1,63 @@
+//solution1
+
+ALGORITHM overlapping_element
+VAR
+    setA, setB : ARRAY_OF INTEGER;
+    i : INTEGER := 0;
+    sum : INTEGER :=0;
+    strA : STRING := setA.toString;
+    strB : STRING := setB.toString;
+    output : CHAR := strA.map + strB.map;
+BEGIN
+   FOR i FROM 0 TO output.length-1 DO
+     IF (strA[i]=strB[i]) THEN
+      write ("get two elements");
+     END_IF
+    write ("add two elements to sum");
+    i := i+1;
+   END_FOR
+END
+
+//solution2
+
+ALGORITHM hash
+VAR
+    setA, setB : ARRAY_OF INTEGER;
+    i, count : INTEGER := 0;
+    sum : INTEGER :=0;
+    strA : STRING := setA.toString;
+    strB : STRING := setB.toString;
+    Map<Integer, Integer> map = new HashMap<>();
+BEGIN
+     FOR  i FROM 0 TO setA.length DO
+             element := setA[i];
+            IF (map.containsKey(element)) THEN
+                count := map.get(element);
+                map.put(element, count+1);
+            ELSE
+                map.put(element, 1);
+            END_IF
+     END_FOR
+     
+     FOR  i FROM 0 TO setB.length DO
+             element := setB[i];
+            IF(map.containsKey(element)) THEN
+                count := map.get(element);
+                map.put(element, count+1);
+            ELSE
+                map.put(element, 1);
+            END_IF
+     END_FOR
+ 
+        Set<Integer> set := map.keySet();
+        Iterator<Integer> iterator := set.iterator();
+     WHILE (iterator.hasNext()) DO
+             key := iterator.next();
+             count = map.get(key);
+           IF (count=2) THEN
+                sum += key*count;
+           END_IF
+     
+        write("Sum of overlapping elements: " + sum);
+     END_WHILE   
+END 
